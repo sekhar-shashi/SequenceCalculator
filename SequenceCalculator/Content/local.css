@@ -1,0 +1,4 @@
+﻿#mytag table tr:nth-child(even) {
+    background-color: #cdcdcd;
+}
+text.ridge {border-style: ridge;}

@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Numeric Sequence Generator Tool";
+}
+
+<h2 style="align-content:center">Numeric Sequence</h2>
+
+@model SequenceCalculator.Models.SequenceModel
+
+
+@Html.Raw((String)ViewBag.Message)
+
+<div class="row">
+    <div class="col-md-8">
+            @using (Html.BeginForm("Sequence", "NumericSequence", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+            {
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.InputNumber, new { @class = "col-md-5 control-label" })
+                    <div class="col-md-7">
+                        @Html.TextBoxFor(m => m.InputNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.InputNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-5">
+                        <input type="submit" value="Generate Sequence" class="btn btn-default" />
+                    </div>
+                </div>
+
+
+                if (@Model != null)
+                {
+                    
+                        <div class="row">
+                            <div class="col-md-4" style = "border-top:5px solid green">
+                                Sequence of number till @Model.InputNumber ::
+                            </div>
+                            <div class="col-md-8" style = "border:1px solid black;">
+                                @if (Model.AllNumber != null)
+                                {
+
+                                    foreach (var item in Model.AllNumber)
+                                    {
+                                       <text> @item  ,</text>
+
+                                    }
+
+                                }
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-md-4" style = "border-top:5px solid green">
+                                Sequence of Odd number till @Model.InputNumber ::
+                            </div>
+                            <div class="col-md-8" style = "border:1px solid black;">
+                                @if (Model.AllOdd != null && Model.AllOdd.Count>=1)
+                                {
+                                    foreach (var odd in Model.AllOdd)
+                                    {
+                                       <text> @odd ,</text>
+                                    }
+                                }
+                                else
+                                {
+                                    <text> &nbsp;</text>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4" style = "border-top:5px solid green">
+                                Sequence of Even number till @Model.InputNumber ::
+                            </div><div class="col-md-8" style = "border:1px solid black;">
+                                    @if (Model.AllEven != null && Model.AllEven.Count >= 1)
+                                    {
+                                        foreach (var evn in Model.AllEven)
+                                        {
+
+                                           <text> @evn ,</text>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <text> &nbsp;</text>}
+                                </div>
+
+                            </div>
+                        <div class="row">
+                            <div class="col-md-4" style = "border-top:5px solid green">
+                                Sequence of Special number till @Model.InputNumber ::
+                            </div>
+                            <div class="col-md-8" style = "border:1px solid black;">
+                                    @if (Model.SpecialSeq != null)
+                                    {
+                                        foreach (var spl in Model.SpecialSeq)
+                                        {
+                                            <text>@spl ,</text>
+                                        }
+                                    }
+                                </div>
+                               </div>
+
+                        <div class="row">
+                            <div class="col-md-4" style = " border-top:5px solid green">
+                                fibnocci sqeuence of  @Model.InputNumber ::
+                            </div>
+                          <div class="col-md-8" style = "border:1px solid black;" >
+                            @if (Model.FibnocciSeq != null)
+                            {
+                                foreach (var fib in Model.FibnocciSeq)
+                                {
+                                    <text >@fib ,</text>
+                                }
+
+                            }
+                        </div>              
+                        </div>
+                }
+
+            }
+
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
